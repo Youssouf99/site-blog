@@ -12,6 +12,7 @@ public class ArticleDTO {
     private UUID id;
     private String title;
     private String content;
+    private String imageUrl;
     private UUID authorId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -14,11 +14,15 @@ public interface UserMapper {
     @Mapping(target = "articles", ignore = true)
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "jwts", ignore = true)
+    @Mapping(target = "favorites", ignore = true)
     User toUser(UserDTO userDTO);
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "articles", ignore = true)
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "jwts", ignore = true)
+    @Mapping(target = "favorites", ignore = true)
     User toUser(UserRequestDTO userRequestDTO);
 }

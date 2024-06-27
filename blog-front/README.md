@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Frontend de MES-BLOCKS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce répertoire contient le code source et les configurations pour le client frontend de l'application MES-BLOCKS.
 
-## Available Scripts
+## Table des matières
 
-In the project directory, you can run:
+- [Frontend de MES-BLOCKS](#frontend-de-mes-blocks)
+  - [Table des matières](#table-des-matières)
+  - [Pré-requis](#pré-requis)
+  - [Installation](#installation)
+  - [Démarrage](#démarrage)
+  - [Structure du projet](#structure-du-projet)
+  - [Technologies utilisées](#technologies-utilisées)
+  - [Fonctionnalités principales](#fonctionnalités-principales)
+  - [Scripts disponibles](#scripts-disponibles)
 
-### `npm start`
+## Pré-requis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js (version v20.11.1)
+- npm (version 10.8.1)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+Clonez ce dépôt et accédez au répertoire `frontend` :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/Youssouf99/site-blog.git
+cd site-blog/frontend
+npm install
+```
 
-### `npm run build`
+## Démarrage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pour démarrer le serveur de développement :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Le frontend sera disponible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-### `npm run eject`
+## Structure du projet
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `src/` : Code source principal
+  - `components/` : Composants React réutilisables
+  - `pages/` : Pages principales de l'application
+  - `api/` : Services API pour communiquer avec le backend
+  - `utils/` : Fonctions utilitaires
+  - `styles/` : Fichiers de style (CSS, SASS, etc.)
+  - `App.js` : Composant principal de l'application
+  - `index.js` : Point d'entrée principal de l'application
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies utilisées
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- React
+- Material Tailwind
+- Heroicons
+- React Router
+- Tailwind
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Fonctionnalités principales
 
-## Learn More
+- Affichage des articles avec pagination
+- Consultation des détails d'un article
+- Authentification et inscription des utilisateurs
+- Ajout, modification et suppression d'articles (authentification requise)
+- Ajout de commentaires (authentification requise)
+- Gestion des favoris pour les articles
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Scripts disponibles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Dans le répertoire du projet, vous pouvez exécuter les scripts suivants :
 
-### Code Splitting
+- `npm start` : Démarre le serveur de développement.
+- `npm run build` : Construit l'application pour la production.
+- `npm test` : Lance les tests unitaires.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

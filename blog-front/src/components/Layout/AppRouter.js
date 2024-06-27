@@ -55,6 +55,8 @@ const AppRouter = () => {
               path="/blog/:id/delete?firstName=:firstName?lastName=:lastName"
               element={<ArticleDelete />}
             />
+            <Route path="/blog/:id/delete" element={<ArticleDelete />} />
+
             <Route
               path="/blog/new"
               element={<ArticleList isAuthenticated={isAuthenticated} />}
@@ -63,6 +65,7 @@ const AppRouter = () => {
               path="/blog/:id/comments"
               element={<ArticleList isAuthenticated={isAuthenticated} />}
             />
+
             <Route path="/logout" element={<Logout />} />
             <Route path="/users" element={<UserList />} />
             <Route path="/users/create" element={<UserCreate />} />

@@ -9,8 +9,8 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CommentsDrawer from "./CommentsDrawer";
 
 const ArticleCard = ({
@@ -22,15 +22,27 @@ const ArticleCard = ({
   const [openDrawer, setOpenDrawer] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+  const previousUrl = useRef(null);
 
   const openCommentsDrawer = () => {
+    previousUrl.current = location.pathname + location.search;
     setOpenDrawer(true);
-    navigate(`/blog/${article?.id}/comments`);
+    const params = new URLSearchParams(location.search);
+    const page = params.get("page");
+    const size = params.get("size");
+    navigate(`/blog/${article?.id}/comments?page=${page}&size=${size}`, {
+      replace: true,
+    });
   };
 
   const closeCommentsDrawer = () => {
     setOpenDrawer(false);
-    navigate(`/blog`);
+    if (previousUrl.current) {
+      navigate(previousUrl.current);
+    } else {
+      navigate(`/blog`);
+    }
   };
 
   return (

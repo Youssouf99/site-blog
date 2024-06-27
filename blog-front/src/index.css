@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.gradient-background-1 {
+  background-image: linear-gradient(to right, #f4af2c7d, #24cfe8);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

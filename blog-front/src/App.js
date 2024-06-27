@@ -1,11 +1,10 @@
 import "./App.css";
-import { Button } from "@material-tailwind/react";
+import AppRouter from "./components/Layout/AppRouter";
 
 function App() {
   return (
     <div>
-      <h1>Hello, world!</h1>
-      <Button>Click me !</Button>
+      <AppRouter />
     </div>
   );
 }

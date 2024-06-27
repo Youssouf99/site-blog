@@ -13,9 +13,10 @@ public interface ArticleMapper {
     @Mapping(source = "author.id", target = "authorId")
     ArticleDTO toArticleDTO(Article article);
 
+    @Mapping(source = "authorId", target = "author.id")
     @Mapping(target = "categories", ignore = true)
     @Mapping(target = "comments", ignore = true)
-    @Mapping(source = "authorId", target = "author.id")
+    @Mapping(target = "favoriteByUsers", ignore = true)
     Article toUser(ArticleDTO articleDTO);
 
     @Mapping(target = "id", ignore = true)
@@ -24,6 +25,7 @@ public interface ArticleMapper {
     @Mapping(target = "categories", ignore = true)
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "author", ignore = true)
+    @Mapping(target = "favoriteByUsers", ignore = true)
     Article toUser(ArticleRequestDTO articleRequestDTO);
 
 }

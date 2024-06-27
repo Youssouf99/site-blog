@@ -1,20 +1,23 @@
 package com.example.blogbackend.entities;
 
 import com.example.blogbackend.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"articles", "comments", "jwts", "favorites"})
+@ToString(exclude = {"articles", "comments", "jwts", "favorites"})
+@JsonIgnoreProperties({"articles", "comments", "jwts", "favorites"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,16 +31,28 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+    private String imageUrl;
     private LocalDateTime createdAt;
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private Role role;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Article> articles;
+    private Set<Article> articles = new HashSet<>();
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Jwt> jwts = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+            name = "user_favorite",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private Set<Article> favorites = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

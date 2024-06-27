@@ -6,11 +6,13 @@ import com.example.blogbackend.entities.User;
 import com.example.blogbackend.utils.JwtUtil;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Map;
 
 @Service
+@Transactional
 public class AuthServiceImpl implements AuthService{
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtService jwtService;
@@ -38,6 +40,12 @@ public class AuthServiceImpl implements AuthService{
         jwtService.saveJwt(jwt);
         return jwtMap;
     }
+
+    @Override
+    public boolean validateToken(String token) {
+        return jwtUtil.validateJwtToken(token);
+    }
+
 
     @Override
     public void logout(String token) {

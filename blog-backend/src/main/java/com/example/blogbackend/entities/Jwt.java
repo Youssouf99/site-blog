@@ -30,6 +30,6 @@ public class Jwt {
     @Temporal(TemporalType.TIMESTAMP)
     private Date expirationDate;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 }

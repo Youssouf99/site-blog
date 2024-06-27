@@ -25,4 +25,5 @@ public interface JwtRepository extends JpaRepository<Jwt, UUID> {
     @Query("DELETE FROM Jwt j WHERE j.disabled = true OR j.expire = true OR j.expirationDate < CURRENT_TIMESTAMP")
     void deleteInvalidTokens();
 
+    void deleteByUserId(UUID userId);
 }

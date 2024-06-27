@@ -1,6 +1,8 @@
 package com.example.blogbackend.security;
 
 import com.example.blogbackend.entities.Jwt;
+import com.example.blogbackend.entities.User;
+import com.example.blogbackend.repositories.UserRepository;
 import com.example.blogbackend.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -47,10 +51,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean isValidToken(Jwt jwt, String token, String username) {
-        return !jwtUtil.isTokenExpired(token)
+    public boolean isValidToken(Jwt jwt, String token, String username) {
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+
+        return userDetails != null
+                && !jwtUtil.isTokenExpired(token)
                 && !jwt.isDisabled()
-                && jwt.getUser().getEmail().equals(username);
+                && userDetails.getUsername().equals(username);
+
     }
 
     private void setAuthentication(UserDetails userDetails, HttpServletRequest request) {

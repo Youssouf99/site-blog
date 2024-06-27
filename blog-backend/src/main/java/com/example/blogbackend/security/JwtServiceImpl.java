@@ -21,7 +21,18 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public Jwt saveJwt(Jwt jwt) {
-        return jwtRepository.save(jwt);
+        Optional<Jwt> existingJwtOpt = jwtRepository.findByValue(jwt.getValue());
+
+        if (existingJwtOpt.isPresent()) {
+            Jwt existingJwt = existingJwtOpt.get();
+            existingJwt.setDisabled(jwt.isDisabled());
+            existingJwt.setExpire(jwt.isExpire());
+            existingJwt.setUser(jwt.getUser());
+
+            return jwtRepository.save(existingJwt);
+        } else {
+            return jwtRepository.save(jwt);
+        }
     }
     @Override
     public Optional<Jwt> findByValue(String value) {
@@ -55,6 +66,8 @@ public class JwtServiceImpl implements JwtService {
     public void disableJwtByUserEmail(String userEmail) {
         jwtRepository.disableJwtByUserEmail(userEmail);
     }
+
+
 
     @Scheduled(fixedRate = 3600000) // Exécution toutes les heures (3600000 ms = 1 heure)
     public void deleteInvalidTokens() {
